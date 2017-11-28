@@ -16,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 public class RMIClient implements ActionListener{
@@ -72,7 +71,7 @@ public class RMIClient implements ActionListener{
 		frame.pack();
 		frame.setVisible(true);
 		// need to close frame as default behavior is to hide on exit
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	//Add a button to the button panel.

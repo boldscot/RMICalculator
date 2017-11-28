@@ -33,8 +33,6 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 		frame.setSize(500, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true); // It is necessary to show the frame here!
-		// need to close frame as default behavior is to hide on exit
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	@Override
