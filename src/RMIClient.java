@@ -1,3 +1,10 @@
+/*
+ * @Author: Stephen Collins
+ * @Date: 28/11/2017
+ * @Filename: RemoteUtil.java
+ * @Brief: RMI Client
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -5,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.*;
 import java.rmi.server.ServerNotActiveException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

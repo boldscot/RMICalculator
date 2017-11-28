@@ -1,9 +1,15 @@
+/*
+ * @Author: Stephen Collins
+ * @Date: 28/11/2017
+ * @Filename: RemoteUtilImpl.java
+ * @Brief: Interface implementation for RMI server
+ */
+
 import java.awt.BorderLayout;
 import java.rmi.RemoteException;
 import java.time.ZonedDateTime;
 import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;

@@ -1,3 +1,10 @@
+/*
+ * @Author: Stephen Collins
+ * @Date: 28/11/2017
+ * @Filename: RemoteUtil.java
+ * @Brief: Interface for RMI server
+ */
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.ServerNotActiveException;

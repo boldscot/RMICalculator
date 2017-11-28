@@ -1,3 +1,10 @@
+/*
+ * @Author: Stephen Collins
+ * @Date: 28/11/2017
+ * @Filename: RemoteUtil.java
+ * @Brief: RMI server
+ */
+
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
