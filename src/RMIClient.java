@@ -1,7 +1,7 @@
 /*
  * @Author: Stephen Collins
  * @Date: 28/11/2017
- * @Filename: RemoteUtil.java
+ * @Filename: RMIClient.java
  * @Brief: RMI Client
  */
 
@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.*;
 import java.rmi.server.ServerNotActiveException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,10 @@ public class RMIClient implements ActionListener{
 	private static JTextArea systemMessage;
 	public RemoteUtil remoteServer = null;
 	private String math = "";
+	private static final String ERROR = "Invalid format, valid format= opnd1 operator opnd2\n"
+											+ "where opnd1 and opnd2 are a single Integer!";
+	public int opnd1=0, opnd2=0;
+	public char oper = ' ';
 
 	public RMIClient() {
 		makeGui();
@@ -106,9 +111,10 @@ public class RMIClient implements ActionListener{
 			try {
 				display.setText(""); // clear the display
 				if (remoteServer != null)  {
-					display.append(remoteServer.solve(math)); //get answer from server
+					String a = calculate(math); //get answer from server
+					display.append(a); 
 					systemMessage.setText("");
-					systemMessage.append("Data recieved from server!");
+					if (!a.equals(ERROR)) systemMessage.append("Data recieved from server!");
 				}
 				else  {
 					systemMessage.setText("");
@@ -121,6 +127,46 @@ public class RMIClient implements ActionListener{
 			}
 			break;
 		}
+	}
+	
+	// Function that checks if the math string is valid then accesses remote objects if it is
+	private String calculate(String math) throws RemoteException, ServerNotActiveException {
+		//Math string will be 3 chars in length and be in format of int operator int if valid
+		if (math.length() <= 0 || math.length() > 3) return ERROR;
+		if (!(isInteger(math.charAt(0)) && isOperator(math.charAt(1)) && isInteger(math.charAt(2))))
+			return ERROR;
+		
+		String ans = "";
+		opnd1 = Character.getNumericValue(math.charAt(0));
+		opnd2 = Character.getNumericValue(math.charAt(2));
+		oper = math.charAt(1);
+	
+		switch(oper) {
+		case '+':
+			ans = remoteServer.add(opnd1, opnd2);
+			break;
+		case '-':
+			ans = remoteServer.subtract(opnd1, opnd2);
+			break;
+		case '*':
+			ans = remoteServer.mult(opnd1, opnd2);
+			break;
+		case '/':
+			ans = remoteServer.div(opnd1, opnd2);
+			break;
+		}
+		return ans;
+	}
+	
+	//Helper method to determine if a char is a num
+	private boolean isInteger(char n) {
+		int num = Character.getNumericValue(n); 
+		return num >=0 && num <=9;
+	}
+
+	//Helper method to determine if a char is a operator
+	private boolean isOperator(char o) {
+		return o== '+' || o== '-' || o=='*' || o=='/';
 	}
 
 	public static void main(String[] args){

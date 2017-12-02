@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.time.ZonedDateTime;
 import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -40,51 +41,6 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 		jta.append("Client connected at ip"+ getClientHost() +"\n");
 		return "Hi! from Server\nToday is "+ ZonedDateTime.now();
 	}
-
-	@Override
-	public String solve(String math) throws RemoteException, ServerNotActiveException {
-		//Math string will be 3 chars in length and be in format of int operator int if valid
-		if (math.length() <= 0 || math.length() > 3) return error();
-		if (!(isInteger(math.charAt(0)) && isOperator(math.charAt(1)) && isInteger(math.charAt(2))))
-			return error();
-
-		opnd1 = Character.getNumericValue(math.charAt(0));
-		opnd2 = Character.getNumericValue(math.charAt(2));
-		oper = math.charAt(1);
-
-		switch(oper) {
-		case '+':
-			ans = Integer.toString(opnd1 + opnd2);
-			break;
-		case '-':
-			ans = Integer.toString(opnd1 - opnd2);
-			break;
-		case '*':
-			ans = Integer.toString(opnd1 * opnd2);
-			break;
-		case '/':
-			if (opnd2 != 0) ans = Float.toString((float) opnd1 / opnd2);
-			else ans = "Undifined, division  by zero!";
-			break;
-		}
-		updateServerText();
-		return ans;
-	}
-
-	@Override
-	public String error() throws RemoteException {
-		return "Invalid format, valid format= n op n \n"
-				+ "where n is a single digit and op is an operator!";
-	}
-	
-	public boolean isInteger(char n) {
-		int num = Character.getNumericValue(n); 
-		return num >=0 && num <=9;
-	}
-
-	public boolean isOperator(char o) {
-		return o== '+' || o== '-' || o=='*' || o=='/';
-	}
 	
 	private void updateServerText() throws ServerNotActiveException {
 		jta.append("Request from client:\n");
@@ -92,5 +48,39 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 		jta.append("Opnd2: " + opnd2 +"\n");
 		jta.append("Oper: " + oper +"\n");
 		jta.append("Data to client: " + ans +"\n");
+	}
+
+	@Override
+	public String add(int x, int y) throws RemoteException, ServerNotActiveException {
+		opnd1 = x; opnd2 = y;
+		ans =Integer.toString(opnd1 + opnd2);
+		updateServerText();
+		return ans;
+	}
+
+	@Override
+	public String subtract(int x, int y) throws RemoteException, ServerNotActiveException {
+		opnd1 = x; opnd2 = y;
+		ans =Integer.toString(opnd1 - opnd2);
+		updateServerText();
+		return ans;
+	}
+
+	@Override
+	public String mult(int x, int y) throws RemoteException, ServerNotActiveException {
+		opnd1 = x; opnd2 = y;
+		ans =Integer.toString(opnd1 * opnd2);
+		updateServerText();
+		return ans;
+	}
+
+	@Override
+	public String div(int x, int y) throws RemoteException, ServerNotActiveException {
+		opnd1 = x; opnd2 = y;
+		if (opnd2 != 0) ans=Float.toString((float) opnd1 / opnd2);
+		else ans="Undifined, division  by zero!";
+		
+		updateServerText();
+		return ans;
 	}
 }

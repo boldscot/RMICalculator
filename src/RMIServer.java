@@ -1,7 +1,7 @@
 /*
  * @Author: Stephen Collins
  * @Date: 28/11/2017
- * @Filename: RemoteUtil.java
+ * @Filename: RMIServer.java
  * @Brief: RMI server
  */
 

@@ -11,6 +11,8 @@ import java.rmi.server.ServerNotActiveException;
 
 public interface RemoteUtil extends Remote {
 	public String getMessage() throws RemoteException, ServerNotActiveException;
-	public String solve(String math) throws RemoteException, ServerNotActiveException;
-	public String error() throws RemoteException;
+	public String add(int opnd1, int opnd2) throws RemoteException, ServerNotActiveException;
+	public String subtract(int opnd1, int opnd2) throws RemoteException, ServerNotActiveException;
+	public String mult(int opnd1, int opnd2) throws RemoteException, ServerNotActiveException;
+	public String div(int opnd1, int opnd2) throws RemoteException, ServerNotActiveException;
 }
