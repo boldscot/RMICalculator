@@ -13,11 +13,10 @@ public class RMIServer {
 	public static void main(String[] args) {
 		try {
 			RemoteUtilImpl impl=new RemoteUtilImpl();
-			//Need the following two lines if running in eclipse for first time
 			Registry registry = LocateRegistry.createRegistry( 1099 );
 			registry.rebind("RMIServer", impl);
 
-			//Naming.rebind("RMIServer", impl); // Need to comment out this if running for first time in eclipse
+			//Naming.rebind("RMIServer", impl);
 		} catch(Exception e) {
 			System.out.println("Exception: " + e);
 		}
