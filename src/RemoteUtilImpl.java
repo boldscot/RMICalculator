@@ -52,7 +52,7 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 
 	@Override
 	public String add(int x, int y) throws RemoteException, ServerNotActiveException {
-		opnd1 = x; opnd2 = y;
+		opnd1 = x; opnd2 = y; oper = '+';
 		ans =Integer.toString(opnd1 + opnd2);
 		updateServerText();
 		return ans;
@@ -60,7 +60,7 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 
 	@Override
 	public String subtract(int x, int y) throws RemoteException, ServerNotActiveException {
-		opnd1 = x; opnd2 = y;
+		opnd1 = x; opnd2 = y; oper = '-';
 		ans =Integer.toString(opnd1 - opnd2);
 		updateServerText();
 		return ans;
@@ -68,7 +68,7 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 
 	@Override
 	public String mult(int x, int y) throws RemoteException, ServerNotActiveException {
-		opnd1 = x; opnd2 = y;
+		opnd1 = x; opnd2 = y; oper = '*';
 		ans =Integer.toString(opnd1 * opnd2);
 		updateServerText();
 		return ans;
@@ -76,7 +76,7 @@ public class RemoteUtilImpl extends UnicastRemoteObject implements RemoteUtil {
 
 	@Override
 	public String div(int x, int y) throws RemoteException, ServerNotActiveException {
-		opnd1 = x; opnd2 = y;
+		opnd1 = x; opnd2 = y; oper = '/';
 		if (opnd2 != 0) ans=Float.toString((float) opnd1 / opnd2);
 		else ans="Undifined, division  by zero!";
 		
